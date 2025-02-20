@@ -44,7 +44,7 @@
 
     document.body.appendChild(creditsDisplay);
 
-    creditsDisplay.innerHTML = 'By Mr.Negotiv|By Ananas|By Akuma|By Weest_bek | <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9o-JtygFCSL-JewJsw-UHusojkEjxiaVci-UBn1aUp1Tzxw49w99qifuwQuem7FzqomTzDq9uLP5-/pubhtml#" target="_blank" style="color: white; text-decoration: underline;">СОЗДАТЕЛИ</a>';
+    creditsDisplay.innerHTML = 'By Mr.Negotiv|By Ananas|By Akuma|By Weest_bek|Обновление 1.0 ✅| <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9o-JtygFCSL-JewJsw-UHusojkEjxiaVci-UBn1aUp1Tzxw49w99qifuwQuem7FzqomTzDq9uLP5-/pubhtml#" target="_blank" style="color: white; text-decoration: underline;">СОЗДАТЕЛИ</a>';
 
     const fpsDisplay = document.createElement('div');
     fpsDisplay.style.position = 'absolute';
@@ -100,7 +100,7 @@
     menu.style.textAlign = 'center';
     menu.style.width = '300px';
     menu.innerHTML = `
-        <span style="margin-right: auto; color: white; font-size: 12px;">By Akuma|By Mr.Negotiv|By Ananas|By weest_bek</span>
+        <span style="margin-right: auto; color: white; font-size: 12px;">By Akuma|By Mr.Negotiv|By Ananas|By weest_bek|1.0</span>
         <h2 style="margin: 0; font-size: 18px; font-weight: bold;">Mode</h2>
         <div style="margin-top: 15px;">
             <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px;">
