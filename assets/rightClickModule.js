@@ -1,13 +1,3 @@
-// ==UserScript==
-// @name         гей
-// @namespace    none
-// @version      none
-// @description  none
-// @author       You
-// @match        none
-// @grant        none
-// ==/UserScript==
-
 (function() {
     'use strict';
 
