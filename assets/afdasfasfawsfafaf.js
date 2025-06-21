@@ -15,15 +15,15 @@
     'use strict';
 
     // --- Переменные для управления функциями (Настройки по умолчанию и те, что регулируются меню) ---
-    let time\\\\MachineAndAutoEActive = false; // Единый флаг для активности TimeMachine и Auto E (управляется пробелом)
-    let current\\\\\Speed = 1; // Текущий множитель скорости для TimeMachine
-    let randomSpee\\\dEnabled = true; // Random Speed ВКЛЮЧЁН по умолчанию
-    let autoEInte\\\rvalMs = 0; // Интервал для Auto E (предустановленное значение, без слайдера в меню)
-    let showFpsDis\\play = true; // Отображать FPS
-    let showPingDi\\splay = true; // Отображать пинг
-    let fpsPingFon\\\tSize = 13; // Размер шрифта для FPS/Ping (предустановленное значение 13px)
-    let displayCor\\ner = 'top-left'; // Угол отображения FPS/Ping (предустановленное значение, без селектора в меню)
-    let pingUpdateI\\\ntervalMs = 1000; // Интервал обновления пинга в мс (предустановленное значение)
+    let timeMachineAndAutoEActive = false; // Единый флаг для активности TimeMachine и Auto E (управляется пробелом)
+    let currentSpeed = 1; // Текущий множитель скорости для TimeMachine
+    let randomSpeedEnabled = true; // Random Speed ВКЛЮЧЁН по умолчанию
+    let autoEIntervalMs = 0; // Интервал для Auto E (предустановленное значение, без слайдера в меню)
+    let showFpsDisplay = true; // Отображать FPS
+    let showPingDisplay = true; // Отображать пинг
+    let fpsPingFontSize = 13; // Размер шрифта для FPS/Ping (предустановленное значение 13px)
+    let displayCorner = 'top-left'; // Угол отображения FPS/Ping (предустановленное значение, без селектора в меню)
+    let pingUpdateIntervalMs = 1000; // Интервал обновления пинга в мс (предустановленное значение)
 
     let adaptiveAutoEIntervalEnabled = false; // Включение/выключение адаптивного интервала Auto E (по умолчанию выключено)
     let ePressesPerTick = 10; // Количество нажатий 'E' за один такт (по умолчанию 10)
