@@ -17,13 +17,14 @@
     // --- Переменные для управления функциями (Настройки по умолчанию и те, что регулируются меню) ---
     let timeMachineAndAutoEActive = false; // Единый флаг для активности TimeMachine и Auto E (управляется пробелом)
     let currentSpeed = 1; // Текущий множитель скорости для TimeMachine
-    let randomSpeedEnabled = true; // Random Speed ВКЛЮЧЁН по умолчанию
+    let randomSpeedEnabled = false; // Random Speed ВКЛЮЧЁН по умолчанию
     let autoEIntervalMs = 0; // Интервал для Auto E (предустановленное значение, без слайдера в меню)
-    let showFpsDisplay = true; // Отображать FPS
-    let showPingDisplay = true; // Отображать пинг
+    let showFpsDisplay = false; // Отображать FPS
+    let showPingDisplay = false; // Отображать пинг
     let fpsPingFontSize = 13; // Размер шрифта для FPS/Ping (предустановленное значение 13px)
     let displayCorner = 'top-left'; // Угол отображения FPS/Ping (предустановленное значение, без селектора в меню)
     let pingUpdateIntervalMs = 1000; // Интервал обновления пинга в мс (предустановленное значение)
+    let useRightMouseButton = false; // true — ПКМ, false — пробел
 
     let adaptiveAutoEIntervalEnabled = false; // Включение/выключение адаптивного интервала Auto E (по умолчанию выключено)
     let ePressesPerTick = 10; // Количество нажатий 'E' за один такт (по умолчанию 10)
@@ -721,13 +722,17 @@ menu.style.justifyContent = 'space-between';
 
         <div style="width: 48%; margin-bottom: 20px;">
             <h3 style="margin: 0 0 10px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;">NerestMachine</h3>
+            <label style="display: flex; align-items: center; font-size: 14px; margin-top: 8px;">
+    <input type="checkbox" id="controlToggle" checked style="margin-right: 8px;">
+    <span>Правая кнопка мишы|Right mouse button</span>
+</label>
             <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px;">
-                <span>Множитель: <span id="timeSpeedValue">1.0</span>x</span>
+                <span>Множитель|Multiplier: <span id="timeSpeedValue">1.0</span>x</span>
                 <input type="range" id="timeSpeedSlider" min="0.1" max="10" step="0.1" value="1" style="width: 150px;">
             </label>
             <label style="display: flex; align-items: center; font-size: 14px;">
                 <input type="checkbox" id="randomSpeedToggle" ${randomSpeedEnabled ? 'checked' : ''} style="margin-right: 8px;">
-                <span>Случайная скорость</span>
+                <span>Случайная скорость|Random speed</span>
             </label>
         </div>
 
@@ -735,10 +740,10 @@ menu.style.justifyContent = 'space-between';
             <h3 style="margin: 0 0 10px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;">Auto E</h3>
             <label style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px;">
                 <input type="checkbox" id="adaptiveAutoEIntervalToggle" ${adaptiveAutoEIntervalEnabled ? 'checked' : ''} style="margin-right: 8px;">
-                <span>Ауто Настройка(по пингу интернета)</span>
+                <span>Ауто Настройка(по пингу интернета)|Auto Configuration (by internet ping)</span>
             </label>
             <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px;">
-                <span>Повторений(типо скорости): <span id="ePressesPerTickValue">10</span></span>
+                <span>Повторений(типо скорости)|Repetitions (like speed): <span id="ePressesPerTickValue">10</span></span>
                 <input type="range" id="ePressesPerTickSlider" min="1" max="20" step="1" value="10" style="width: 150px;">
             </label>
         </div>
@@ -747,34 +752,34 @@ menu.style.justifyContent = 'space-between';
             <h3 style="margin: 0 0 10px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;">FPS/MS</h3>
             <label style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px;">
                 <input type="checkbox" id="showFpsToggle" ${showFpsDisplay ? 'checked' : ''} style="margin-right: 8px;">
-                <span>Показывать fps?</span>
+                <span>Показывать|Show| fps?</span>
             </label>
             <label style="display: flex; align-items: center; margin-bottom: 10px; font-size: 14px;">
                 <input type="checkbox" id="showPingToggle" ${showPingDisplay ? 'checked' : ''} style="margin-right: 8px;">
-                <span>Показывать Internet ms?</span>
+                <span>Показывать|Show| Internet ms?</span>
             </label>
         </div>
 
         <div style="width: 48%; margin-bottom: 20px;">
             <h3 style="margin: 0 0 10px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;">YouTube Audio</h3>
             <div style="margin-bottom: 10px;">
-                <label style="display: block; margin-bottom: 5px; font-size: 14px;">URL видео YouTube:</label>
-                <input type="text" id="youtubeUrlInput" placeholder="Введите URL видео" style="width: calc(100% - 10px); padding: 8px; border: 1px solid #444; background: #333; color: white; border-radius: 4px;">
+                <label style="display: block; margin-bottom: 5px; font-size: 14px;">YouTube video URL:</label>
+                <input type="text" id="youtubeUrlInput" placeholder="Enter the video URL" style="width: calc(100% - 10px); padding: 8px; border: 1px solid #444; background: #333; color: white; border-radius: 4px;">
             </div>
             <label style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px;">
-                <span>Громкость: <span id="youtubeVolumeValue">50%</span></span>
+                <span>Громкость|Volume: <span id="youtubeVolumeValue">50%</span></span>
                 <input type="range" id="youtubeVolumeSlider" min="0" max="100" step="1" value="50" style="width: 150px;">
             </label>
             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <button id="playYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Воспроизвести</button>
-                <button id="pauseYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Пауза</button>
-                <button id="stopYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Стоп</button>
+                <button id="playYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Reproduce</button>
+                <button id="pauseYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Pause</button>
+                <button id="stopYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Stop</button>
             </div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <button id="rewindYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">-10 сек</button>
-                <button id="forwardYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">+10 сек</button>
+                <button id="rewindYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">-10 sek</button>
+                <button id="forwardYoutubeVideo" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">+10 sek</button>
             </div>
-            <button id="clearYoutubeUrl" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Очистить URL</button>
+            <button id="clearYoutubeUrl" style="flex: 1; padding: 8px 15px; background: linear-gradient(90deg, #00ff88, #00ccff); border: 2px solid #00ff88; color: black; text-shadow: 0 0 3px white; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #00ff88; margin: 4px; font-weight: bold;">Clear URL</button>
         </div>
 
         <button id="closeMenu" style="
@@ -788,7 +793,7 @@ menu.style.justifyContent = 'space-between';
             cursor: pointer;
             width: 100%;
             transition: background 0.2s ease;
-        ">Закрыть</button>
+        ">Close</button>
     `;
     document.body.appendChild(menu);
 
@@ -822,6 +827,7 @@ menu.style.justifyContent = 'space-between';
     openSound.volume = 0.3;
     openSound.play();
         // Синхронизируем состояние всех элементов меню с текущими переменными
+        controlToggle.checked = useRightMouseButton;
         timeSpeedSlider.value = currentSpeed;
         timeSpeedValue.textContent = currentSpeed.toFixed(1);
         randomSpeedToggle.checked = randomSpeedEnabled;
@@ -849,6 +855,13 @@ menu.style.justifyContent = 'space-between';
     // --- Обработчики событий меню ---
     closeMenuButton.addEventListener('click', closeMenu);
 
+    const controlToggle = document.getElementById('controlToggle');
+
+controlToggle.addEventListener('change', () => {
+    useRightMouseButton = controlToggle.checked;
+    console.log("TM");
+});
+
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Insert') {
             if (menu.style.opacity === '0') {
@@ -861,18 +874,38 @@ menu.style.justifyContent = 'space-between';
 
     // Единый обработчик для пробела (включает/выключает Auto E и TimeMachine)
     document.addEventListener('keydown', (e) => {
-        if (e.key === window.autoEKey && !timeMachineAndAutoEActive) {
-            e.preventDefault();
-            startBothFeatures();
-        }
-    });
+    if (!useRightMouseButton && e.key === ' ' && !timeMachineAndAutoEActive) {
+        e.preventDefault();
+        startBothFeatures();
+    }
+});
 
-    document.addEventListener('keyup', (e) => {
-        if (e.key === window.autoEKey && timeMachineAndAutoEActive) {
-            e.preventDefault();
-            stopBothFeatures();
-        }
-    });
+document.addEventListener('keyup', (e) => {
+    if (!useRightMouseButton && e.key === ' ' && timeMachineAndAutoEActive) {
+        e.preventDefault();
+        stopBothFeatures();
+    }
+});
+
+document.addEventListener('mousedown', (e) => {
+    if (useRightMouseButton && e.button === 2 && !timeMachineAndAutoEActive) {
+        e.preventDefault();
+        startBothFeatures();
+    }
+});
+
+document.addEventListener('mouseup', (e) => {
+    if (useRightMouseButton && e.button === 2 && timeMachineAndAutoEActive) {
+        e.preventDefault();
+        stopBothFeatures();
+    }
+});
+
+document.addEventListener('contextmenu', (e) => {
+    if (useRightMouseButton) {
+        e.preventDefault(); // Отключаем меню ПКМ, если включено управление ПКМ
+    }
+});
 
     // Обработчики для элементов TimeMachine
     timeSpeedSlider.addEventListener('input', () => {
